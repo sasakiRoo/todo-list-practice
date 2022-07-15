@@ -1,21 +1,33 @@
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Easing } from 'react-native';
+import {useState} from 'react'
 import TodoBox from './components/TodoBox'
+
+
 
 export default function App() {
 
-  const changeBg = () => {
-    console.log('biru')
+  const [bgCol, setBgCol] = useState(false)
+
+  const applyBg = () => {
+    setBgCol(current => !current)
   }
+  
+  // const change = (index) => {
+  //   const newIndex = tempArr.splice(index, 1)
+
+  //   console.log('color: '+newIndex)
+  // }
 
   return (
-    <View style={styles.container}>
+    <View style={
+      [
+        styles.container,
+        {backgroundColor: bgCol ? '#1B2430' : '#F9F9F9'},
+      ]}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Rencaanamu</Text>
+        <Text style={[styles.headerText, {color: bgCol ? 'white' : 'black'}]}>Rencaanamu</Text>
         <View style={styles.colorsWrapper}>
-          <TouchableOpacity style={[styles.colorCircle, styles.pink]}></TouchableOpacity>
-          <TouchableOpacity onPress={changeBg} style={[styles.colorCircle, styles.blue]}></TouchableOpacity>
-          <TouchableOpacity style={[styles.colorCircle, styles.green]}></TouchableOpacity>
-          <TouchableOpacity style={[styles.colorCircle, styles.dark]}></TouchableOpacity>
+          <TouchableOpacity onPress={applyBg}  style={[styles.colorCircle, styles.dark]}></TouchableOpacity>
         </View>
       </View>
       <View style={{marginVertical: 14, flexDirection: 'column', justifyContent: 'center', alignItems: 'center',}}>
@@ -67,24 +79,62 @@ const styles = StyleSheet.create({
   colorsWrapper: {
     flexDirection: 'row',
     width: '40%',
-    justifyContent: 'space-around', 
+    justifyContent: 'flex-end', 
     marginRight: 20,
   },
   colorCircle: {
-    width: 25,
-    height: 25,
+    width: 30,
+    height: 30,
     borderRadius: 50,
-  },
-  pink: {
-    backgroundColor: '#FFB2A8',
-  },
-  blue: {
-    backgroundColor: '#A9A8FF',
-  },
-  green: {
-    backgroundColor: '#A8FFB0',
+    borderColor:'white',
+    borderWidth: 1,
   },
   dark: {
-    backgroundColor: '#555555',
+    backgroundColor: '#1B2430',
   },
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // const [isBlue, setIsBlue] = useState(false)
+  // const [isPink, setIsPink] = useState(false)
+  // const [isGreen, setIsGreen] = useState(false)
+  // const [isDark, setIsDark] = useState(false)
+
+  // const changeBgBlue = () => {
+  //   setIsBlue(current => !current)
+  //   console.log('biru')
+  // }
+  // const changeBgPink = () => {
+  //   setIsPink(current => !current)
+  //   console.log('pink')
+  // }
+  // const changeBgGreen = () => {
+  //   setIsGreen(current => !current)
+  // }
+  // const changeBgDark = () => {
+  //   setIsDark(current => !current)
+  // }
+
+
+
+
+
+
+  // {backgroundColor: isBlue ? '#A9A8FF' : '#F9F9F9'},
+// {backgroundColor: isPink ? '#FFB2A8' : '#F9F9F9'}
