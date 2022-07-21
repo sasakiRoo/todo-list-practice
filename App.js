@@ -6,28 +6,32 @@ import TodoBox from './components/TodoBox'
 
 export default function App() {
 
-  const [bgCol, setBgCol] = useState(false)
+  const [background, setBackground] = useState('#F9F9F9')
+  const [fontColor, setFontColor] = useState('black')
 
-  const applyBg = () => {
-    setBgCol(current => !current)
+  const applyStyle = (background, fontColor) => {
+    setBackground(background)
+    if (background === '#1B2430') {
+      setFontColor(fontColor)
+    }else{
+      setFontColor('black')
+    }
+    
   }
-  
-  // const change = (index) => {
-  //   const newIndex = tempArr.splice(index, 1)
-
-  //   console.log('color: '+newIndex)
-  // }
 
   return (
     <View style={
       [
         styles.container,
-        {backgroundColor: bgCol ? '#1B2430' : '#F9F9F9'},
+        {backgroundColor: `${background}`}
       ]}>
       <View style={styles.header}>
-        <Text style={[styles.headerText, {color: bgCol ? 'white' : 'black'}]}>Rencaanamu</Text>
+        <Text style={[styles.headerText, { color: `${fontColor}` }]}>Rencaanamu</Text>
         <View style={styles.colorsWrapper}>
-          <TouchableOpacity onPress={applyBg}  style={[styles.colorCircle, styles.dark]}></TouchableOpacity>
+          <TouchableOpacity onPress={() => applyStyle('#A9A8FF')}  style={[styles.colorCircle, styles.blue]}></TouchableOpacity>
+          <TouchableOpacity onPress={() => applyStyle('#FFB2A8')}  style={[styles.colorCircle, styles.pink]}></TouchableOpacity>
+          <TouchableOpacity onPress={() => applyStyle('#A8FFB0')}  style={[styles.colorCircle, styles.green]}></TouchableOpacity>
+          <TouchableOpacity onPress={() => applyStyle('#1B2430', 'white')} style={[styles.colorCircle, styles.dark]}></TouchableOpacity>
         </View>
       </View>
       <View style={{marginVertical: 14, flexDirection: 'column', justifyContent: 'center', alignItems: 'center',}}>
@@ -85,9 +89,19 @@ const styles = StyleSheet.create({
   colorCircle: {
     width: 30,
     height: 30,
+    marginHorizontal: 5,
     borderRadius: 50,
     borderColor:'white',
     borderWidth: 1,
+  },
+  blue: {
+    backgroundColor: '#A9A8FF',
+  },
+  pink: {
+    backgroundColor: '#FFB2A8',
+  },
+  green: {
+    backgroundColor: '#A8FFB0',
   },
   dark: {
     backgroundColor: '#1B2430',
